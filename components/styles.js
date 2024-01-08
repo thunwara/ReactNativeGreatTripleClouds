@@ -10,9 +10,9 @@ export const Colors = {
   secondary: '#E5E7EB',
   tertiary: '#1F2937',
   darkLight: '#9CA3AF',
-  brand: '#2892d9',
-  green: '#10B981',
-  red: '#EF4444',
+  brand: '#2C93DA',
+  green: '##1AC0C6',
+  red: '##A73A00',
 };
 
 const { primary, secondary, tertiary, darkLight, brand, green, red } = Colors;
@@ -33,6 +33,7 @@ export const InnerContainer = styled.View`
 export const PageLogo = styled.Image`
   width: 250px;
   height: 200px;
+  margin-top: 100px;
 `;
 
 export const PageTitle = styled.Text`
@@ -42,3 +43,16 @@ export const PageTitle = styled.Text`
   color: ${brand};
   padding: 10px;
 `;
+
+export const SubTitle = styled.Text`
+  font-size: 18px;
+  margin-botton: 20px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  color: ${tertiary}
+`;
+
+export const StyledFormArea = styled.View`
+  width: 90%;
+`;
+
