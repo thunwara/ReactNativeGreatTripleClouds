@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
 import Constants from 'expo-constants';
 
 const StatusBarHeight = Constants.StatusBarHeight;
@@ -10,9 +10,9 @@ export const Colors = {
   secondary: '#E5E7EB',
   tertiary: '#1F2937',
   darkLight: '#9CA3AF',
-  brand: '#2C93DA',
-  green: '##1AC0C6',
-  red: '##A73A00',
+  brand: '#2892d9',
+  green: '#10B981',
+  red: '#EF4444',
 };
 
 const { primary, secondary, tertiary, darkLight, brand, green, red } = Colors;
@@ -33,6 +33,7 @@ export const InnerContainer = styled.View`
 export const PageLogo = styled.Image`
   width: 250px;
   height: 200px;
+
   margin-top: 100px;
 `;
 
@@ -46,13 +47,58 @@ export const PageTitle = styled.Text`
 
 export const SubTitle = styled.Text`
   font-size: 18px;
-  margin-botton: 20px;
+  margin-bottom: 20px;
   letter-spacing: 1px;
   font-weight: bold;
-  color: ${tertiary}
+  color: ${tertiary};
 `;
-
 export const StyledFormArea = styled.View`
   width: 90%;
 `;
 
+export const StyledTextInput = styled.TextInput`
+  background-color: ${secondary};
+  padding: 15px;
+  padding-left: 55px;
+  padding-right: 55px;
+  border-radius: 5px;
+  font-size: 16px;
+  height: 60px;
+  margin-vertical: 3px;
+  margin-bottom: 10px;
+  color: ${tertiary};
+`;
+
+export const StyledInputLabel = styled.Text`
+  color: ${tertiary};
+  font-size: 13px;
+  text-align: left;
+`;
+
+export const LeftIcon = styled.View`
+  left: 15px;
+  top: 38px;
+  position: absolute;
+  z-index: 1;
+`;
+
+export const RightIcon = styled.TouchableOpacity`
+  left: 15px;
+  top: 38px;
+  position: absolute;
+  z-index: 1;
+`;
+
+export const StyledButton = styled.TouchableOpacity`
+  padding: 15px;
+  background-color: ${brand};
+  justify-content: center;
+  border-radius: 5px;
+  margin-vertical: 5px;
+  height: 60px;
+`;
+
+export const Buttonext = styled.Text`
+  color: ${primary};
+  font-size: 16px;
+`;
