@@ -13,7 +13,7 @@ export default function App() {
     //   <Text>hello world</Text>
     //   <StatusBar style="auto" />
     // </View>
-    <Login />
+    <Signup />
   );
 }
 
