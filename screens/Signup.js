@@ -67,6 +67,7 @@ const Signup = ({ navigation }) => {
           {/* <PageLogo resizeMode="cover" source={require('./../assets/Google-Travel.png')} /> */}
           <PageTitle>Ban Pin Station</PageTitle>
           <SubTitle>Account Sign up</SubTitle>
+          <SubTitle>proud</SubTitle>
 
           {show && (
             <DateTimePicker
@@ -76,6 +77,7 @@ const Signup = ({ navigation }) => {
               is24Hour={true}
               display="default"
               onChange={onChange}
+              style={{ position: 'absolute', bottom: 0, left: 0, right: 0 }}
             />
           )}
 
