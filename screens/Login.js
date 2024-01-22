@@ -39,7 +39,10 @@ import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 // keyboard avoiding view
 import axios from 'axios';
 
-const Login = ({ navigation }) => {
+// keyboard avoiding view
+import axios from 'axios';
+
+const Login = () => {
   const [hidePassword, setHidePassword] = useState(true);
   const [message, setMessage] = useState();
   const [messageType, setMessageType] = useState();
@@ -88,12 +91,6 @@ const Login = ({ navigation }) => {
             onSubmit={(values, {setSubmitting}) => {
               console.log(values);
               navigation.navigate('Welcome');
-              // if (values.email == '' || values.password == ''){
-              //   handleMessage('Please fill all the fields');
-              //   setSubmitting(false);
-              // } else {
-              //   handleLogin(values, setSubmitting);
-              // }
             }}
           >
             {({ handleChange, handleBlur, handleSubmit, values, isSubmitting }) => (
@@ -139,7 +136,7 @@ const Login = ({ navigation }) => {
                 </StyledButton>
                 <ExtraView>
                   <ExtraText>Don't have an account already?</ExtraText>
-                  <TextLink onPress={() => navigation.navigate('Signup')}>
+                  <TextLink>
                     <TextLinkContent> Sign up</TextLinkContent>
                   </TextLink>
                 </ExtraView>
