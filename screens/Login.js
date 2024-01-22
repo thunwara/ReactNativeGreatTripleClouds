@@ -28,7 +28,7 @@ import {
   TextLink,
   TextLinkContent,
 } from './../components/styles';
-import { View, ActivityIndicator } from 'react-native';
+import { View } from 'react-native';
 
 // colors
 const { brand, darkLight, primary } = Colors;
@@ -36,46 +36,8 @@ const { brand, darkLight, primary } = Colors;
 // keyboard avoiding view
 import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 
-// keyboard avoiding view
-import axios from 'axios';
-
-// keyboard avoiding view
-import axios from 'axios';
-
-const Login = () => {
+const Login = ({ navigation }) => {
   const [hidePassword, setHidePassword] = useState(true);
-  const [message, setMessage] = useState();
-  const [messageType, setMessageType] = useState();
-
-  const handleLogin = (credentials, setSubmitting) => {
-    handleMessage(null);
-    const url = 'https://whispering-headland-00232.herokuapp.com/user/signin';
-
-    axios
-      .post(url, credentials)
-      .then((response) => {
-        const result = response.data;
-        const { message, status, date } = result;
-
-        if (status !== 'SUCCESS') {
-          handleMessage(message, status);
-          console.log("success")
-        } else {
-          navigation.navigate('Welcome', { ...date[0] });
-        }
-        setSubmitting(false);
-      })
-      .catch((error) => {
-        console.log(error.JSON());
-        setSubmitting(false);
-        handleMessage('An error occurred. Check your network and try again');
-      });
-  };
-
-  const handleMessage = (message, type = 'FAILED') => {
-    setMessage(message);
-    setMessageType(type);
-  };
 
   return (
     <KeyboardAvoidingWrapper>
@@ -88,12 +50,12 @@ const Login = () => {
 
           <Formik
             initialValues={{ email: '', password: '' }}
-            onSubmit={(values, {setSubmitting}) => {
+            onSubmit={(values) => {
               console.log(values);
               navigation.navigate('Welcome');
             }}
           >
-            {({ handleChange, handleBlur, handleSubmit, values, isSubmitting }) => (
+            {({ handleChange, handleBlur, handleSubmit, values }) => (
               <StyledFormArea>
                 <MyTextInput
                   label="Email Address"
@@ -118,17 +80,10 @@ const Login = () => {
                   hidePassword={hidePassword}
                   setHidePassword={setHidePassword}
                 />
-                <MsgBox type={messageType}>{message}</MsgBox>
-                {!isSubmitting && (
-                  <StyledButton onPress={handleSubmit}>
-                    <ButtonText>Login</ButtonText>
-                  </StyledButton>
-                )}
-                {isSubmitting && (
-                  <StyledButton disable={true}>
-                    <ActivityIndicator size="large" color={primary} />
-                  </StyledButton>
-                )}
+                <MsgBox>...</MsgBox>
+                <StyledButton onPress={handleSubmit}>
+                  <ButtonText>Login</ButtonText>
+                </StyledButton>
                 <Line />
                 <StyledButton google={true} onPress={handleSubmit}>
                   <Fontisto name="google" color={primary} size={25} />
@@ -136,7 +91,7 @@ const Login = () => {
                 </StyledButton>
                 <ExtraView>
                   <ExtraText>Don't have an account already?</ExtraText>
-                  <TextLink>
+                  <TextLink onPress={() => navigation.navigate('Signup')}>
                     <TextLinkContent> Sign up</TextLinkContent>
                   </TextLink>
                 </ExtraView>

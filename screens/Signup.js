@@ -39,7 +39,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 // keyboard avoiding view
 import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 
-const Signup = () => {
+const Signup = ({ navigation }) => {
   const [hidePassword, setHidePassword] = useState(true);
   const [show, setShow] = useState(false);
   const [date, setDate] = useState(new Date(2000, 0, 1));
@@ -67,7 +67,6 @@ const Signup = () => {
           {/* <PageLogo resizeMode="cover" source={require('./../assets/Google-Travel.png')} /> */}
           <PageTitle>Ban Pin Station</PageTitle>
           <SubTitle>Account Sign up</SubTitle>
-          <SubTitle>proud</SubTitle>
 
           {show && (
             <DateTimePicker
@@ -77,7 +76,6 @@ const Signup = () => {
               is24Hour={true}
               display="default"
               onChange={onChange}
-              style={{ position: 'absolute', bottom: 0, left: 0, right: 0 }}
             />
           )}
 
@@ -85,6 +83,7 @@ const Signup = () => {
             initialValues={{ fullName: '', email: '', dateOfBirth: '', password: '', comfirmPassword: '' }}
             onSubmit={(values) => {
               console.log(values);
+              navigation.navigate('Welcome');
             }}
           >
             {({ handleChange, handleBlur, handleSubmit, values }) => (
@@ -149,7 +148,7 @@ const Signup = () => {
                 />
                 <MsgBox>...</MsgBox>
                 <StyledButton onPress={handleSubmit}>
-                  <ButtonText>Login</ButtonText>
+                  <ButtonText>Signup</ButtonText>
                 </StyledButton>
                 <Line />
                 {/* <StyledButton google={true} onPress={handleSubmit}>
@@ -158,7 +157,7 @@ const Signup = () => {
               </StyledButton> */}
                 <ExtraView>
                   <ExtraText>Already have an account?</ExtraText>
-                  <TextLink>
+                  <TextLink onPress={() => navigation.navigate('Login')}>
                     <TextLinkContent> Login</TextLinkContent>
                   </TextLink>
                 </ExtraView>

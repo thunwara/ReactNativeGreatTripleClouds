@@ -14,7 +14,7 @@ import {
   Avatar,
 } from './../components/styles';
 
-const Welcome = () => {
+const Welcome = ({ navigation }) => {
   return (
     <>
       <StatusBar style="light" />
@@ -27,7 +27,7 @@ const Welcome = () => {
           <StyledFormArea>
             <Avatar resizeMode="cover" source={require('./../assets/Google-Travel.png')} />
             <Line />
-            <StyledButton onPress={() => {}}>
+            <StyledButton onPress={() => navigation.navigate('Login')}>
               <ButtonText>Logout</ButtonText>
             </StyledButton>
           </StyledFormArea>

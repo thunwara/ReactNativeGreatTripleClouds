@@ -20,7 +20,7 @@ const { primary, secondary, tertiary, darkLight, brand, green, red } = Colors;
 export const StyledContainer = styled.View`
   flex: 1;
   padding: 25px;
-  padding-top: ${StatusBarHeight + 10}px;
+  padding-top: ${StatusBarHeight + 30}px;
   background-color: ${primary};
 `;
 
@@ -55,7 +55,7 @@ export const Avatar = styled.Image`
 `;
 
 export const WelcomeImage = styled.Image`
-  height: 40%;
+  height: 30%;
   min-width: 100%;
 `;
 
@@ -66,9 +66,7 @@ export const PageTitle = styled.Text`
   color: ${brand};
   padding: 10px;
 
-  ${(props) =>
-    props.welcome &&
-    `
+  ${(props) => props.welcome && `
     font-size: 35px;
   `}
 `;
@@ -80,9 +78,7 @@ export const SubTitle = styled.Text`
   font-weight: bold;
   color: ${tertiary};
 
-  ${(props) =>
-    props.welcome &&
-    `
+  ${(props) => props.welcome && `
     margin-bottom: 5px;
     font-weight: normal;
   `}
@@ -149,14 +145,13 @@ export const ButtonText = styled.Text`
   ${(props) =>
     props.google == true &&
     `
-  margin-left: 10px;
+  padding: 25px;
 `}
 `;
 
 export const MsgBox = styled.Text`
   text-align: center;
   font-size: 13px;
-  color: ${(props) => (props.type == 'SUCCESS' ? green : red)};
 `;
 
 export const Line = styled.View`
@@ -167,26 +162,26 @@ export const Line = styled.View`
 `;
 
 export const ExtraView = styled.View`
-  justify-content: center;
-  flex-direction: row;
-  align-content: center;
-  color: ${tertiary};
-  font-size: 15px;
+    justify-content: center;
+    flex-direction: row;
+    align-content: center;
+    color: ${tertiary};
+    font-size: 15px;
 `;
 
 export const ExtraText = styled.Text`
-  justify-content: center;
-  align-content: center;
-  color: ${tertiary};
-  font-size: 15px;
+    justify-content: center;
+    align-content: center;
+    color: ${tertiary};
+    font-size: 15px;
 `;
 
 export const TextLink = styled.TouchableOpacity`
-  justify-content: center;
-  align-items: center;
+    justify-content: center;
+    align-items: center;
 `;
 
 export const TextLinkContent = styled.Text`
-  color: ${brand};
-  font-size: 15px;
+    color: ${brand};
+    font-size: 15px;
 `;
