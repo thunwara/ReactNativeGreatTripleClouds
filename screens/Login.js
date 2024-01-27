@@ -36,6 +36,9 @@ const { brand, darkLight, primary } = Colors;
 // keyboard avoiding view
 import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 
+// API client
+import axios from 'axios';
+
 const Login = ({ navigation }) => {
   const [hidePassword, setHidePassword] = useState(true);
 
