@@ -28,7 +28,7 @@ import {
   TextLink,
   TextLinkContent,
 } from './../components/styles';
-import { View, TouchableOpacity, Platform } from 'react-native';
+import { View, TouchableOpacity, Platform, ActivityIndicator } from 'react-native';
 
 // colors
 const { brand, darkLight, primary } = Colors;
@@ -39,10 +39,16 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 // keyboard avoiding view
 import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 
+// api client
+import axios from 'axios';
+
 const Signup = ({ navigation }) => {
   const [hidePassword, setHidePassword] = useState(true);
   const [show, setShow] = useState(false);
   const [date, setDate] = useState(new Date(2000, 0, 1));
+
+  const [message, setMessage] = useState();
+  const [messageType, setMessageType] = useState();
 
   // Actual date of birth to be sent
   const [dob, setDob] = useState();
@@ -57,6 +63,36 @@ const Signup = ({ navigation }) => {
 
   const showDatePicker = () => {
     setShow(true);
+  };
+
+  const handleMessage = (message, type = 'FAILED') => {
+    setMessage(message);
+    setMessageType(type);
+  };
+
+  // form handling
+  const handleSignup = (credential, setSubmitting) => {
+    handleMessage(null);
+    const url = 'http://localhost:3000/user/signup';
+
+    axios
+      .post(url, credential)
+      .then((response) => {
+        const result = response.data;
+        const { message, status, data } = result;
+
+        if (status !== 'SUCCESS') {
+          handleMessage(message, status);
+        } else {
+          navigation.navigate('Welcome', { ...data });
+        }
+        setSubmitting(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setSubmitting(false);
+        handleMessage('An errror occured. Check your network and try agian.');
+      });
   };
 
   return (
@@ -80,23 +116,50 @@ const Signup = ({ navigation }) => {
           )}
 
           <Formik
-            initialValues={{ fullName: '', email: '', dateOfBirth: '', password: '', comfirmPassword: '' }}
-            onSubmit={(values) => {
-              console.log(values);
-              navigation.navigate('Welcome');
+            initialValues={{ name: '', username: '', email: '', dateOfBirth: '', password: '', confirmPassword: '' }}
+            onSubmit={(values, { setSubmitting }) => {
+              // console.log(values);
+              // navigation.navigate('Welcome');
+              values = {...values, dateOfBirth: dob};
+              if (
+                values.name == '' ||
+                values.username == '' ||
+                values.email == '' ||
+                values.dateOfBirth == '' ||
+                values.password == '' ||
+                values.confirmPassword == ''
+              ) {
+                handleMessage('Please fill all the fields.');
+                setSubmitting(false);
+              } else if (values.password != values.confirmPassword) {
+                handleMessage('Password dose not match.');
+                setSubmitting(false);
+              } else {
+                handleSignup(values, setSubmitting);
+              }
             }}
           >
-            {({ handleChange, handleBlur, handleSubmit, values }) => (
+            {({ handleChange, handleBlur, handleSubmit, values, isSubmitting }) => (
               <StyledFormArea>
                 <MyTextInput
                   label="Full Name"
                   icon="person"
                   placeholder="Adam Johnson"
                   placeholderTextColor={darkLight}
-                  onChangeText={handleChange('fullName')}
-                  onBlur={handleBlur('fullName')}
-                  value={values.fullName}
-                  keyboardType="fullName-address"
+                  onChangeText={handleChange('name')}
+                  onBlur={handleBlur('name')}
+                  value={values.name}
+                  keyboardType="name-address"
+                />
+                <MyTextInput
+                  label="Username"
+                  icon="person"
+                  placeholder="Adam_Johnson"
+                  placeholderTextColor={darkLight}
+                  onChangeText={handleChange('username')}
+                  onBlur={handleBlur('username')}
+                  value={values.username}
+                  keyboardType="name-address"
                 />
                 <MyTextInput
                   label="Email Address"
@@ -138,18 +201,28 @@ const Signup = ({ navigation }) => {
                   icon="lock"
                   placeholder="password"
                   placeholderTextColor={darkLight}
-                  onChangeText={handleChange('comfirmPassword')}
-                  onBlur={handleBlur('comfirmPassword')}
-                  value={values.comfirmPassword}
+                  onChangeText={handleChange('confirmPassword')}
+                  onBlur={handleBlur('confirmPassword')}
+                  value={values.confirmPassword}
                   secureTextEntry={hidePassword}
                   isPassword={true}
                   hidePassword={hidePassword}
                   setHidePassword={setHidePassword}
                 />
-                <MsgBox>...</MsgBox>
-                <StyledButton onPress={handleSubmit}>
-                  <ButtonText>Signup</ButtonText>
-                </StyledButton>
+
+                <MsgBox type={messageType}>{message}</MsgBox>
+
+                {!isSubmitting && (
+                  <StyledButton onPress={handleSubmit}>
+                    <ButtonText>Signup</ButtonText>
+                  </StyledButton>
+                )}
+                {isSubmitting && (
+                  <StyledButton disable={true}>
+                    <ActivityIndicator size="large" color={primary} />
+                  </StyledButton>
+                )}
+
                 <Line />
                 {/* <StyledButton google={true} onPress={handleSubmit}>
                 <Fontisto name="google" color={primary} size={25} />
@@ -186,7 +259,7 @@ const MyTextInput = ({ label, icon, isPassword, hidePassword, setHidePassword, i
       )}
       {isPassword && (
         <RightIcon onPress={() => setHidePassword(!hidePassword)}>
-          <Ionicons name={hidePassword ? 'md-eye-off' : 'md-eye'} size={30} color={darkLight} />
+          <Ionicons name={hidePassword ? 'eye-outline' : 'eye-off-outline'} size={30} color={darkLight} />
         </RightIcon>
       )}
     </View>
