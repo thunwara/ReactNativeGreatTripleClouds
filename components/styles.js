@@ -28,6 +28,7 @@ export const InnerContainer = styled.View`
   flex: 1;
   width: 100%;
   align-items: center;
+  background-color: red;
 `;
 
 export const WelcomeContainer = styled(InnerContainer)`

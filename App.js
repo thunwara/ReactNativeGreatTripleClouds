@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
-// // screens
-// import Login from './screens/Login';
-// import Signup from './Welcomescreens/Signup';
-// import Welcome from './screens/Welcome';
+// screens
+import Login from './screens/Login';
+import Signup from './screens/Signup';
+import Welcome from './screens/Welcome';
+import AttractionListPage from './screens/AttractionListPage';
 
 // react navigation stack
 import RootStack from './navigators/RootStack';
@@ -16,7 +17,7 @@ export default function App() {
     //   <Text>hello world</Text>
     //   <StatusBar style="auto" />
     // </View>
-    <RootStack />
+    <AttractionListPage />
   );
 }
 

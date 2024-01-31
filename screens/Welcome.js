@@ -19,14 +19,19 @@ const Welcome = ({ navigation, route }) => {
   return (
     <>
       <StatusBar style="light" />
-      <WelcomeImage resizeMode="cover" source={require('./../assets/pexels-aditya-aiyar.jpg')} />
+      {/* <WelcomeImage resizeMode="cover" source={require('./../assets/pexels-aditya-aiyar.jpg')} /> */}
       <InnerContainer>
         <WelcomeContainer>
-          <PageTitle welcome={true}>Hello Traveler</PageTitle>
+          <PageTitle welcome={true}>Hello, Ban Pin</PageTitle>
           <SubTitle>{name || 'Theewara'}</SubTitle>
-          <SubTitle>{email || 'mtheewara@gmail.com'}</SubTitle>
           <StyledFormArea>
-            <Avatar resizeMode="cover" source={require('./../assets/Google-Travel.png')} />
+            {/* <Avatar resizeMode="cover" source={require('./../assets/Google-Travel.png')} /> */}
+            <StyledButton onPress={() => navigation.navigate('AttractionListPage')}>
+              <ButtonText>Attractions</ButtonText>
+            </StyledButton>
+            <StyledButton onPress={() => navigation.navigate('Login')}>
+              <ButtonText>Home Stays</ButtonText>
+            </StyledButton>
             <Line />
             <StyledButton onPress={() => navigation.navigate('Login')}>
               <ButtonText>Logout</ButtonText>

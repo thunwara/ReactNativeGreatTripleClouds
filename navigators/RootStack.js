@@ -11,6 +11,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './../screens/Login';
 import Signup from './../screens/Signup';
 import Welcome from './../screens/Welcome';
+import AttractionListPage from '../screens/AttractionListPage';
 
 const Stack = createNativeStackNavigator();
 const RootStack = () => {
@@ -21,7 +22,7 @@ const RootStack = () => {
           headerStyle: {
             backgroundColor: 'transparent',
           },
-          headerTintColor: tertiary, // Corrected typo here
+          headerTintColor: tertiary,
           headerTransparent: true,
           headerTitle: '',
           headerLeftContainerStyle: {
@@ -33,6 +34,7 @@ const RootStack = () => {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen option={{ headerTintColor: primary }} name="Welcome" component={Welcome} />
+        <Stack.Screen name="AttractionListPage" component={AttractionListPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );
