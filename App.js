@@ -2,11 +2,11 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
 // screens
-import Login from './screens/Login';
-import Signup from './screens/Signup';
-import Welcome from './screens/Welcome';
-import AttractionListPage from './screens/AttractionListPage';
-import MainContainer from './components/MainContainer';
+import Login from './screens/LoginScreen';
+import Signup from './screens/SignupScreen';
+import Welcome from './screens/WelcomeScreen';
+import AttractionListPage from './screens/AttractionListScreen';
+import MainContainer from './navigators/MainContainer';
 
 // react navigation stack
 import RootStack from './navigators/RootStack';

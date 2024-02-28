@@ -12,7 +12,7 @@ import {
   WelcomeContainer,
   WelcomeImage,
   Avatar,
-} from './../components/styles';
+} from '../components/styles';
 
 const Welcome = ({ navigation, route }) => {
   const { name, email } = route.params;

@@ -27,7 +27,7 @@ import {
   ExtraText,
   TextLink,
   TextLinkContent,
-} from './../components/styles';
+} from '../components/styles';
 import { View, TouchableOpacity, Platform, ActivityIndicator } from 'react-native';
 
 // colors
@@ -120,7 +120,7 @@ const Signup = ({ navigation }) => {
             onSubmit={(values, { setSubmitting }) => {
               // console.log(values);
               // navigation.navigate('Welcome');
-              values = {...values, dateOfBirth: dob};
+              values = { ...values, dateOfBirth: dob };
               if (
                 values.name == '' ||
                 values.username == '' ||

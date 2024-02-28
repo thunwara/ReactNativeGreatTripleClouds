@@ -27,7 +27,7 @@ import {
   ExtraText,
   TextLink,
   TextLinkContent,
-} from './../components/styles';
+} from '../components/styles';
 import { View, ActivityIndicator, Platform } from 'react-native';
 
 // colors
