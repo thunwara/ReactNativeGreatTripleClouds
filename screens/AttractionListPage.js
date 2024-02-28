@@ -1,8 +1,14 @@
 // AttractionListPage.js
 
 import React from 'react';
-import { View } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+import Header from '../components/Header';
 import AttractionList from '../components/AttractionList';
+
 
 import {
   InnerContainer,
@@ -17,7 +23,6 @@ import {
   Avatar,
   StyledContainer,
 } from './../components/styles';
-import { Header } from 'react-native/Libraries/NewAppScreen';
 
 const AttractionListPage = ({ attractions, navigation }) => {
   const handleAttractionPress = (attractionId) => {
@@ -48,10 +53,13 @@ const AttractionListPage = ({ attractions, navigation }) => {
     console.log('Pressed on profile');
   };
 
+  const Stack = createStackNavigator();
+
   const username = 'JohnDoe'; // Replace with actual username
 
   return (
     <>
+
       <Header username={username} currentPage="Attraction List" onProfilePress={handleProfilePress} />
       <InnerContainer>
         <StyledContainer>

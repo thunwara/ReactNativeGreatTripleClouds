@@ -6,6 +6,7 @@ import Login from './screens/Login';
 import Signup from './screens/Signup';
 import Welcome from './screens/Welcome';
 import AttractionListPage from './screens/AttractionListPage';
+import MainContainer from './components/MainContainer';
 
 // react navigation stack
 import RootStack from './navigators/RootStack';
@@ -17,7 +18,7 @@ export default function App() {
     //   <Text>hello world</Text>
     //   <StatusBar style="auto" />
     // </View>
-    <AttractionListPage />
+    <MainContainer />
   );
 }
 

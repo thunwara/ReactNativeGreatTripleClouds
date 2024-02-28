@@ -1,4 +1,4 @@
-// AttractionList.js
+// AttractionList.js from ChatGPT
 
 import React from 'react';
 import { FlatList } from 'react-native';

@@ -31,7 +31,7 @@ import {
 import { View, ActivityIndicator, Platform } from 'react-native';
 
 // colors
-const { brand, darkLight, primary } = Colors;
+const { brand, darkLight, primary, yellow } = Colors;
 
 // keyboard avoiding view
 import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';

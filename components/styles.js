@@ -6,13 +6,14 @@ const StatusBarHeight = Constants.StatusBarHeight;
 
 //colors
 export const Colors = {
-  primary: '#ffffff',
-  secondary: '#E5E7EB',
-  tertiary: '#1F2937',
+  primary: '#fbfbfb',
+  secondary: '#efefef',
+  tertiary: '#1d2731',
   darkLight: '#9CA3AF',
-  brand: '#2892d9',
+  brand: '#083c5d',
   green: '#10B981',
   red: '#EF4444',
+  yellow: '#ffbb39'
 };
 
 const { primary, secondary, tertiary, darkLight, brand, green, red } = Colors;
@@ -28,7 +29,7 @@ export const InnerContainer = styled.View`
   flex: 1;
   width: 100%;
   align-items: center;
-  background-color: red;
+  background-color: ${primary};
 `;
 
 export const WelcomeContainer = styled(InnerContainer)`

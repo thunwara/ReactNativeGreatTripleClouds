@@ -29,7 +29,7 @@ const Welcome = ({ navigation, route }) => {
             <StyledButton onPress={() => navigation.navigate('AttractionListPage')}>
               <ButtonText>Attractions</ButtonText>
             </StyledButton>
-            <StyledButton onPress={() => navigation.navigate('Login')}>
+            <StyledButton onPress={() => navigation.navigate('AttractionListPage')}>
               <ButtonText>Home Stays</ButtonText>
             </StyledButton>
             <Line />
