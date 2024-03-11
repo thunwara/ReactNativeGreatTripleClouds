@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+//LoginScreen.js
+
+import React, { useContext, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 
 // formik
@@ -40,10 +42,19 @@ import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 import axios from 'axios';
 // import { response } from 'express';
 
+//async-storage
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+//credentials context
+import { CredentialContext } from '../components/CredentialsContext';
+
 const Login = ({ navigation }) => {
   const [hidePassword, setHidePassword] = useState(true);
   const [message, setMessage] = useState();
   const [messageType, setMessageType] = useState();
+
+  //context
+  const { storedCredentials, setStoredCredentials } = useContext(CredentialContext);
 
   const handleMessage = (message, type = 'FAILED') => {
     setMessage(message);
@@ -63,7 +74,8 @@ const Login = ({ navigation }) => {
         if (status !== 'SUCCESS') {
           handleMessage(message, status);
         } else {
-          navigation.navigate('Welcome', { ...data[0] });
+          // navigation.navigate('Welcome');
+          persistLogin({ ...data[0] }, message, status);
         }
         setSubmitting(false);
       })
@@ -71,6 +83,18 @@ const Login = ({ navigation }) => {
         console.log(error);
         setSubmitting(false);
         handleMessage('An errror occured. Check your network and try agian.');
+      });
+  };
+
+  const persistLogin = (credentials, message, status) => {
+    AsyncStorage.setItem('flowerCribCredentials', JSON.stringify(credentials))
+      .then(() => {
+        handleMessage(message, status);
+        setStoredCredentials(credentials);
+      })
+      .catch((error) => {
+        console.log(error);
+        handleMessage('Persisting login failed');
       });
   };
 

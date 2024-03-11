@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+// SignupScreen.js
+
+import React, { useState, useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
 
 // formik
@@ -42,6 +44,14 @@ import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 // api client
 import axios from 'axios';
 
+//async-storage
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+//credentials context
+import { CredentialContext } from '../components/CredentialsContext';
+
+
+
 const Signup = ({ navigation }) => {
   const [hidePassword, setHidePassword] = useState(true);
   const [show, setShow] = useState(false);
@@ -52,6 +62,9 @@ const Signup = ({ navigation }) => {
 
   // Actual date of birth to be sent
   const [dob, setDob] = useState();
+
+  //context
+  const { storedCredentials, setStoredCredentials } = useContext(CredentialContext);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -84,7 +97,8 @@ const Signup = ({ navigation }) => {
         if (status !== 'SUCCESS') {
           handleMessage(message, status);
         } else {
-          navigation.navigate('Welcome', { ...data });
+          // navigation.navigate('Welcome', { ...data });
+          persistLogin({ ...data }, message, status);
         }
         setSubmitting(false);
       })
@@ -92,6 +106,18 @@ const Signup = ({ navigation }) => {
         console.log(error);
         setSubmitting(false);
         handleMessage('An errror occured. Check your network and try agian.');
+      });
+  };
+
+  const persistLogin = (credentials, message, status) => {
+    AsyncStorage.setItem('flowerCribCredentials', JSON.stringify(credentials))
+      .then(() => {
+        handleMessage(message, status);
+        setStoredCredentials(credentials);
+      })
+      .catch((error) => {
+        console.log(error);
+        handleMessage('Persisting login failed');
       });
   };
 

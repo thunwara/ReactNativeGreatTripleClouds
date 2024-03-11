@@ -1,4 +1,6 @@
-import React from 'react';
+//WelcomeScreen.js
+
+import React, { useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
 
 import {
@@ -14,8 +16,25 @@ import {
   Avatar,
 } from '../components/styles';
 
+//async-storage
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+//credentials context
+import { CredentialContext } from '../components/CredentialsContext';
+
 const Welcome = ({ navigation, route }) => {
-  const { name, email } = route.params;
+  //context
+  const { storedCredentials, setStoredCredentials } = useContext(CredentialContext);
+  const { name, email } = storedCredentials;
+
+  const ClearLogin = () => {
+    AsyncStorage.removeItem('flowerCribCredentials')
+      .then(() => {
+        setStoredCredentials('');
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <>
       <StatusBar style="light" />
@@ -33,7 +52,7 @@ const Welcome = ({ navigation, route }) => {
               <ButtonText>Home Stays</ButtonText>
             </StyledButton>
             <Line />
-            <StyledButton onPress={() => navigation.navigate('Login')}>
+            <StyledButton onPress={ClearLogin}>
               <ButtonText>Logout</ButtonText>
             </StyledButton>
           </StyledFormArea>

@@ -1,32 +1,44 @@
+//App.js
+
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-
-// screens
-import Login from './screens/LoginScreen';
-import Signup from './screens/SignupScreen';
-import Welcome from './screens/WelcomeScreen';
-import AttractionListPage from './screens/AttractionListScreen';
-import MainContainer from './navigators/MainContainer';
 
 // react navigation stack
 import RootStack from './navigators/RootStack';
 
+//appLoading
+import AppLoading from 'expo-app-loading';
+
+//async-storage
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useState } from 'react';
+
+//credentials context
+import { CredentialContext } from './components/CredentialsContext';
+
 export default function App() {
+  const [appReady, setAppReady] = useState(false);
+  const [storedCredentials, setStoredCredentials] = useState('');
+
+  const checkLoginCredentials = () => {
+    AsyncStorage.getItem('FlowerCribCredentials')
+      .then((result) => {
+        if (result !== null) {
+          setStoredCredentials(JSON.parse(result));
+        } else {
+          setStoredCredentials(null);
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+
+  if (!appReady) {
+    return <AppLoading startAsync={checkLoginCredentials} onFinish={() => setAppReady(true)} onError={console.warn} />;
+  }
+
   return (
-    // <View style={styles.container}>
-    //   <Text>Open up App.js to start working on your app!</Text>
-    //   <Text>hello world</Text>
-    //   <StatusBar style="auto" />
-    // </View>
-    <MainContainer />
+    <CredentialContext.Provider value={{ storedCredentials, setStoredCredentials }}>
+      <RootStack />
+    </CredentialContext.Provider>
   );
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
