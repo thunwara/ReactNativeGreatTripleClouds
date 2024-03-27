@@ -19,13 +19,13 @@ import AttractionListPage from '../screens/AttractionListScreen';
 const Stack = createNativeStackNavigator();
 
 //credentials context
-import { CredentialContext } from '../components/CredentialsContext';
+import { CredentialsContext } from '../components/CredentialsContext';
 
 const RootStack = () => {
   return (
-    <CredentialContext.Consumer>
+    <CredentialsContext.Consumer>
       {({ storedCredentials }) => (
-        <NavigationContainer>
+        <NavigationContainer style={{ backgroundColor: 'red' }}>
           <Stack.Navigator
             screenOptions={{
               headerStyle: {
@@ -38,22 +38,25 @@ const RootStack = () => {
                 paddingLeft: 20,
               },
             }}
-            initialRouteName="Login"
           >
             {storedCredentials ? (
-              <Stack.Screen option={{ headerTintColor: primary }} name="Welcome" component={Welcome} />
-              // <Stack.Screen name="HomeScreen" component={HomeScreen}/>
+              <Stack.Screen
+                options={{
+                  headerTintColor: primary,
+                }}
+                name="Welcome"
+                component={Welcome}
+              />
             ) : (
               <>
                 <Stack.Screen name="Login" component={Login} />
                 <Stack.Screen name="Signup" component={Signup} />
-                <Stack.Screen name="AttractionListPage" component={AttractionListPage} />
               </>
             )}
           </Stack.Navigator>
         </NavigationContainer>
       )}
-    </CredentialContext.Consumer>
+    </CredentialsContext.Consumer>
   );
 };
 

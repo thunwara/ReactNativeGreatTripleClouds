@@ -14,7 +14,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from 'react';
 
 //credentials context
-import { CredentialContext } from './components/CredentialsContext';
+import { CredentialsContext } from './components/CredentialsContext';
 
 export default function App() {
   const [appReady, setAppReady] = useState(false);
@@ -37,8 +37,8 @@ export default function App() {
   }
 
   return (
-    <CredentialContext.Provider value={{ storedCredentials, setStoredCredentials }}>
+    <CredentialsContext.Provider value={{ storedCredentials, setStoredCredentials }}>
       <RootStack />
-    </CredentialContext.Provider>
+    </CredentialsContext.Provider>
   );
 }

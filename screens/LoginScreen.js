@@ -46,7 +46,7 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 //credentials context
-import { CredentialContext } from '../components/CredentialsContext';
+import { CredentialsContext } from '../components/CredentialsContext';
 
 const Login = ({ navigation }) => {
   const [hidePassword, setHidePassword] = useState(true);
@@ -54,7 +54,7 @@ const Login = ({ navigation }) => {
   const [messageType, setMessageType] = useState();
 
   //context
-  const { storedCredentials, setStoredCredentials } = useContext(CredentialContext);
+  const { storedCredentials, setStoredCredentials } = useContext(CredentialsContext);
 
   const handleMessage = (message, type = 'FAILED') => {
     setMessage(message);
@@ -113,7 +113,7 @@ const Login = ({ navigation }) => {
               // console.log(values);
               // navigation.navigate('Welcome');
               if (values.email == '' || values.password == '') {
-                handleMessage('Please fill allthe fields.');
+                handleMessage('Please fill all the fields.');
                 setSubmitting(false);
               } else {
                 handleLogin(values, setSubmitting);
